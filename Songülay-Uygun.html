@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBAN Bilgileri</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .kart {
+            background: #ffffff;
+            padding: 30px 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .banka {
+            font-size: 14px;
+            font-weight: 700;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .isim {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 20px;
+        }
+        .iban-kutu {
+            background: #f0f2f5;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 15px;
+            color: #333;
+            word-break: break-all;
+            margin-bottom: 20px;
+            border: 1px solid #e1e4e8;
+        }
+        .buton {
+            background-color: #0066ff;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        .buton:active {
+            transform: scale(0.98);
+        }
+        .basarili {
+            background-color: #10b981 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="kart">
+    <!-- BURADAKİ BİLGİLERİ MÜŞTERİYE GÖRE DÜZENLEYİN -->
+    <div class="banka">İş Bankası</div>
+    <div class="isim">Songülay  Uygun</div>
+    <div class="iban-kutu" id="ibanMetni">TR26 0006 4000 0014 2670 2228 63</div>
+    
+    <button class="buton" id="kopyalaBtn" onclick="ibaniKopyala()">IBAN'ı Kopyala</button>
+</div>
+
+<script>
+    function ibaniKopyala() {
+        // Kopyalanırken boşlukları temizler, banka uygulamalarına doğrudan yapışmasını sağlar
+        var hamIban = document.getElementById("ibanMetni").innerText.replace(/\s+/g, '');
+        
+        navigator.clipboard.writeText(hamIban).then(function() {
+            var btn = document.getElementById("kopyalaBtn");
+            btn.innerText = "✓ IBAN Kopyalandı!";
+            btn.classList.add("basarili");
+            
+            setTimeout(function() {
+                btn.innerText = "IBAN'ı Kopyala";
+                btn.classList.remove("basarili");
+            }, 2500);
+        });
+    }
+</script>
+
+</body>
+</html>
